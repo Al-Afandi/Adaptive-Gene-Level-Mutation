@@ -1,5 +1,4 @@
 import matplotlib
-matplotlib.use('Agg')
 import numpy as np
 import random
 import matplotlib.pyplot as plt
@@ -7,10 +6,7 @@ import itertools as it
 import os
 import pickle
 
-os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID"
-os.environ["CUDA_VISIBLE_DEVICES"]="2"
-
-class GATest():
+class GA():
     def __init__(self,S=128,P=400,I=20):
         #problem parameters
         self.ProblemSize=S #problem size
@@ -258,38 +254,43 @@ class GATest():
             self.Population=NewPopulation
         return self.MinWeights
     
-GA=GATest()
+
 TableSize=64
 NumberOfGerneration = 20
 GenomeSize=200
 KeepRatio=0.05
 MutationRate=0.3
-GA=GATest()
 repeat=20
 Locus=np.zeros((repeat,NumberOfGerneration ))
 Powers=[]
-Population=GA.Population
 for i in range(0,8):
-    Powers.append(i)
-    
+    Powers.append(i)    
 PowersValue = np.zeros((len(Powers)+1,repeat))
 Data = np.zeros((len(Powers)+1,repeat,NumberOfGerneration))
 counter=0
+
+
+GAI=GA() #genetic algorithm instance
+Population=GAT.Population
+
 for i in Powers:
     for r in range(0,repeat):
-        LocusMinWeights=GA.LocusNormalCorssoverMutationSolver(10**i)
+        LocusMinWeights=GAI.LocusNormalCorssoverMutationSolver(10**i)
         Locus[r,:]   =LocusMinWeights
         Data[i,r,:]= LocusMinWeights
-        GA.Population = Population  
+        GAI.Population = Population  
     PowersValue[counter]= np.min(Locus,1)
     print(counter)
     counter+=1  
     
 for r in range(0,repeat):
-    LocusMinWeights=GA.LInfLocusNormalCorssoverMutationSolver()
+    LocusMinWeights=GAI.LInfLocusNormalCorssoverMutationSolver()
     Locus[r,:]   =LocusMinWeights
     Data[len(Powers),r,:]= LocusMinWeights
-    GA.Population = Population 
+    GAI.Population = Population 
     
 PowersValue[counter]= np.min(Locus,1)
-print(PowersValue)     
+
+plt.figure()
+plt.plot(np.mean(PowersValue,1),'b')
+plt.show()
