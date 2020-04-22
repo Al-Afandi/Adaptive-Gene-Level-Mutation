@@ -261,9 +261,9 @@ AllSolutions=np.asarray(list(itertools.permutations(range(ProblemSize))))
 MinDistanceCost=float('Inf')
 
 """
-This Figure depicts TSP Problem with 10 cities manifesting the speed and the ability of our approach to nearly 
-reach the optimal solution in comparison with the traditional approach. 
-The optimal solution has been obtained using brute force algorithm. The experiments were repeated 100 times.
+This Figure depicts TSP Problem with 10 cities manifesting the speed and theability of our approach to nearly reach the optimal solution
+in comparison with the traditional approach. All the experiments have been conducted with 200 populationsize, 200 generations and 
+0.5 mutation rate. The optimal solution has been obtained using brute force algorithm. The experiments were repeated 100 times.
 """
 
 NumGeneration=200
@@ -287,10 +287,13 @@ plt.show()
 
 
 """
-This Figure depicts TSP Problem with 10 cities manifesting the ability of our approach to surpass the traditional
-approach having the same time. we did run the the traditional approach for two times more generations 
-e.g. when number of generation equal 50 for the locus mutation, it will be 50*2 for the traditional mutation. 
-The optimal solution has been obtained using brute force algorithm and the experiments were repeated 100 times.
+This Figure depicts TSP Problem with 10 cities manifesting the ability of ourapproach to surpass the traditional approach
+consuming the same time. 
+We did run the the traditional approach for two times more generations e.g. if axis x equals 25 generations for locus mutation,
+it will equal 25*2 generations for traditional mutation.
+All the experiments have been conducted with 200 population size and 0.5 mutationrate. 
+We run the traditional approach for 600 generations while we run locus mutationonly for 300 generations. 
+The optimal solution has been obtained using brute forcealgorithm and the experiments were repeated 100 times.
 """
 
 NumGeneration=50
