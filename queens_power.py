@@ -291,6 +291,11 @@ for r in range(0,repeat):
     
 PowersValue[counter]= np.min(Locus,1)
 
+'''
+The fitness value of the best optimal solution for 64-Queens problem as a function of Powers where we averaged out ten runs.
+It starts with uniform distribution then uses a logarithmic scale of Pow, and end up with L-infinite norm. 
+'''
+
 plt.figure()
 plt.plot(np.mean(PowersValue,1),'b')
 plt.show()
