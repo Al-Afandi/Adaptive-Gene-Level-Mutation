@@ -13,7 +13,7 @@ import itertools as it
 # In[3]:
 
 
-class GATest():
+class GA():
     def __init__(self,S=128,P=400,I=30):
         #problem parameters
         self.ProblemSize=S #number of cities
@@ -416,49 +416,40 @@ class GATest():
 
 # In[4]:
 
-
-GA=GATest()
-Population = GA.Population 
 repeat=10
 Baseline=np.zeros((repeat,30))
 Locus=np.zeros((repeat,30))
+
 Powers=[]
 for i in range(0,8):
     Powers.append(i)
-
+    
 PowersValue = np.zeros((len(Powers)+1,30))
 counter=0
+
+GAI=GA() #genetic algorithm instance
+Population = GA.Population 
+
 for i in Powers:
     for r in range(0,repeat):
-        LocusMinWeights=GA.LocusNormalCorssoverMutationSolver(10**i)
+        LocusMinWeights=GAI.LocusNormalCorssoverMutationSolver(10**i)
         Locus[r,:]   =LocusMinWeights
-        GA.Population = Population 
+        GAI.Population = Population 
     PowersValue[counter]= np.mean(Locus,0)
     print(counter)
     counter+=1  
     
 for r in range(0,repeat):
-    LocusMinWeights=GA.LInfLocusNormalCorssoverMutationSolver()
+    LocusMinWeights=GAI.LInfLocusNormalCorssoverMutationSolver()
     Locus[r,:]   =LocusMinWeights
-    GA.Population = Population 
+    GAI.Population = Population 
     
 PowersValue[counter]= np.mean(Locus,0)
 
-
-# In[5]:
-
-
+'''
+The fitness value of the best optimal solution for TSP problem as a function of Powers where we averaged out ten runs.
+It starts with uniform distribution then uses a logarithmic scale of Pow, and end up with L-infinite norm. 
+'''
 plt.figure()
 plt.plot(np.mean(PowersValue,1),'b')
-plt.savefig('./tsp_diffrent_power/TableSize_124_Genom_400_Mutation_0.3_power_0_8_Inf.png')  
 plt.show()
-
-
-# In[7]:
-
-
-plt.plot(np.min(PowersValue[:-1],1),'b')
-plt.show()
-
-
-
